@@ -1,10 +1,11 @@
 import React from 'react';
-import {Row,Col,Menu} from 'antd';
+import {Row,Col,Menu,Affix} from 'antd';
 import {VideoCameraOutlined,HomeFilled,SmileOutlined} from '@ant-design/icons'
 import MenuItem from 'antd/lib/menu/MenuItem';
 import 'antd/dist/antd.css';
 
 const Header=()=>(
+    <Affix>
     <div className="header">
         <Row type="flex" justify="center">
             <Col xs={24} sm={24} md={10} lg={10} xl={10}>
@@ -29,6 +30,7 @@ const Header=()=>(
             </Col>
         </Row>
     </div>
+    </Affix>
 )
 
 export default Header;

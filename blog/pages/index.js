@@ -2,7 +2,8 @@ import React,{useState}from 'react';
 import Head from 'next/head'
 import Header from '../components/Header';
 import Author from '../components/Author';
-import Advert from '../components/Advert'
+import Advert from '../components/Advert';
+import Footer from '../components/Footer'
 import {Row,Col,List} from 'antd'
 import {ScheduleOutlined,FolderOutlined,TeamOutlined} from '@ant-design/icons'
 
@@ -46,6 +47,7 @@ export default function Home() {
           <Advert/>
         </Col>
       </Row>
+      <Footer/>
     </div>
   )
 }
