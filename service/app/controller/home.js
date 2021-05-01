@@ -1,5 +1,5 @@
 'use strict';
-
+//这个文件就是用来测试的
 const Controller = require('egg').Controller;
 
 class HomeController extends Controller {

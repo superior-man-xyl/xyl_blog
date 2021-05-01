@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import {Row, Col,Breadcrumb,Affix} from 'antd'
 import {ScheduleOutlined,FolderOutlined,TeamOutlined} from '@ant-design/icons'
+import axios from 'axios'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
@@ -93,6 +94,23 @@ const Detailed = () => {
     <Footer/>
    </>
   )
+}
+
+Detailed.getInitialProps=async(context)=>{
+  console.log(context.query.id,'-------')
+
+  let id=context.query.id;
+
+  const promise=new Promise((resolve)=>{
+    axios('http://127.0.0.1:7001/default/getArtcleById/'+id).then(
+      (res)=>{
+        console.log(res);
+        resolve(res.data.data[0])
+      }
+    )
+  })
+
+  return await promise;
 }
 
 export default Detailed
