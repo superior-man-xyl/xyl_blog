@@ -12,3 +12,7 @@ exports.mysql={
   enable:true,
   package:'egg-mysql'//通过这个配置，来支持mysql的连接和使用
 }
+exports.cors={
+  enable:true,
+  package:'egg-cors'
+}
