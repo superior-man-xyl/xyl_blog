@@ -45,7 +45,8 @@ function AdminIndex() {
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: "0 16px" }}>
+        <Affix offsetTop={5}>
+          <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>后台管理</Breadcrumb.Item>
             <Breadcrumb.Item>工作台</Breadcrumb.Item>
@@ -60,6 +61,8 @@ function AdminIndex() {
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>xiehuang.com</Footer>
+        </Affix>
+        
       </Layout>
     </Layout>
   );

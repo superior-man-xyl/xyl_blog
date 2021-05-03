@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import marked from "marked";
 import "../static/css/AddArticle.css";
 import { Row, Col, Input, Select, Button, DatePicker } from "antd";
+import axios from "axios";
+import servicePath from "../config/apiUrl";
 const { Option } = Select;
 const { TextArea } = Input;
 
-function AddArticle() {
+function AddArticle(props) {
   const [articleId, setArticleId] = useState(0); // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
   const [articleTitle, setArticleTitle] = useState(""); //文章标题
   const [articleContent, setArticleContent] = useState(""); //markdown的编辑内容
@@ -16,6 +18,10 @@ function AddArticle() {
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [typeInfo, setTypeInfo] = useState([]); // 文章类别信息
   const [selectedType, setSelectType] = useState(1); //选择的文章类别
+
+  useEffect(() => {
+    getTypeInfo(); //获得了文章分类信息
+  }, []);
 
   marked.setOptions({
     renderer: marked.Renderer(),
@@ -34,11 +40,29 @@ function AddArticle() {
     setMarkdownContent(html); //同步编译为markdown
   };
 
-  const changeIntroducer=(e)=>{
-    setIntroducemd(e.target.value)
-    let html=marked(e.target.value)
-    setIntroducehtml(html)
-  }
+  const changeIntroducer = (e) => {
+    setIntroducemd(e.target.value);
+    let html = marked(e.target.value);
+    setIntroducehtml(html);
+  };
+
+  //从中台得到文章信息
+  const getTypeInfo = (e) => {
+    axios({
+      mothed: "get",
+      url: servicePath.getTypeInfo,
+      headers: { "Access-Control-Allow-Origin": "*" },
+      withCredentials: true,
+    }).then((res) => {
+      if (res.data.data == "没有登陆") {
+        //来自于中间件，路由守卫
+        localStorage.removeItem("openId");
+        props.history.push("/");
+      } else {
+        setTypeInfo(res.data.data);
+      }
+    });
+  };
 
   return (
     <div>
@@ -50,8 +74,12 @@ function AddArticle() {
             </Col>
             <Col span={4}>
               &nbsp;
-              <Select defaultValue="Sign Up" size="large">
-                <Option value="Sign Up">视频教程</Option>
+              <Select defaultValue={selectedType} size="large">
+                {
+                  typeInfo.map((item,index)=>{
+                    return (<Option key={index} value={item.id}>{item.typeName}</Option>)
+                  })
+                }
               </Select>
             </Col>
           </Row>
@@ -86,10 +114,17 @@ function AddArticle() {
             </Col>
             <Col span="24">
               <br />
-              <TextArea rows={4} placeholder="文章简介" onChange={changeIntroducer}></TextArea>
+              <TextArea
+                rows={4}
+                placeholder="文章简介"
+                onChange={changeIntroducer}
+              ></TextArea>
               <br />
               <br />
-              <div className="introduce-html" dangerouslySetInnerHTML={{__html:introducehtml}}></div>
+              <div
+                className="introduce-html"
+                dangerouslySetInnerHTML={{ __html: introducehtml }}
+              ></div>
             </Col>
             <Col span={12}>
               <div className="date-select">

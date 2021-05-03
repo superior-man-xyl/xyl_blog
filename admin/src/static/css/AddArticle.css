@@ -1,13 +1,13 @@
 .markdown-content{
     font-size:16px !important;
-    max-height: 745px;
+    max-height: 45%;
 }
 .show-html{
     padding:10px;
     border:1px solid #ddd;
     border-radius: 5px;
     font-size:16px;
-    height: 745px;
+    height: 45%;
     background-color: #f0f0f0;
     overflow: auto;
 }
