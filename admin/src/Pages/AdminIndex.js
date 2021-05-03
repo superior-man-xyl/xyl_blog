@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
-import '../static/css/AdminIndex.css'
-import { Layout, Menu, Breadcrumb } from "antd";
+import React, { useState } from "react";
+import "../static/css/AdminIndex.css";
+import { Layout, Menu, Breadcrumb, Affix } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -8,23 +8,24 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {Route} from "react-router-dom"
-import AddArticle from './AddArticle'
+import { Route } from "react-router-dom";
+import AddArticle from "./AddArticle";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex(){
-  const [collapsed,setCollapsed] = useState(false);
+function AdminIndex() {
+  const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed);
   };
 
-    return (
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <div className="logo" />
+  return (
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <div className="logo" />
+        <Affix offsetTop={5}>
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
               工作台
@@ -40,30 +41,28 @@ function AdminIndex(){
               留言管理
             </Menu.Item>
           </Menu>
-        </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>后台管理</Breadcrumb.Item>
-              <Breadcrumb.Item>工作台</Breadcrumb.Item>
-            </Breadcrumb>
-            <div
-              className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
-            >
-                <div>
-                    <Route path="/index/" exact component={AddArticle} />
-                </div>
-              蟹黄同学的博客管理系统
+        </Affix>
+      </Sider>
+      <Layout className="site-layout">
+        <Header className="site-layout-background" style={{ padding: 0 }} />
+        <Content style={{ margin: "0 16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>后台管理</Breadcrumb.Item>
+            <Breadcrumb.Item>工作台</Breadcrumb.Item>
+          </Breadcrumb>
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            <div>
+              <Route path="/index/" exact component={AddArticle} />
             </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            xiehuang.com
-          </Footer>
-        </Layout>
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>xiehuang.com</Footer>
       </Layout>
-    );
+    </Layout>
+  );
 }
 
 export default AdminIndex;
