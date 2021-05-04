@@ -21,6 +21,13 @@ function AddArticle(props) {
 
   useEffect(() => {
     getTypeInfo(); //获得了文章分类信息
+    let tmpId = props.match.params.id;
+    console.log(tmpId, "++++++++");
+    if (tmpId) {
+      //分辨是增加还是修改
+      setArticleId(tmpId);
+      getArticleById(tmpId); //获得相应id的文章的信息
+    }
   }, []);
 
   marked.setOptions({
@@ -64,71 +71,88 @@ function AddArticle(props) {
     });
   };
 
-  const selectTypeHandler=(value)=>{
-    setSelectType(value);//用于切换博客类型,保证页面上改变了，useState的值也改变
-  }
+  const selectTypeHandler = (value) => {
+    setSelectType(value); //用于切换博客类型,保证页面上改变了，useState的值也改变
+  };
 
-  const saveArticle=()=>{//保存文章
-    if(!selectedType){
-      message.error('必须选择文章类型')
-      return false
-    }else if(!articleTitle){
-      message.error('文章标题不能为空')
-      return false
-    }else if(!articleContent){
-      message.error('文章内容不能为空')
-      return false
-    }else if(!introducemd){
-      message.error('文章简介不能为空')
-      return false
-    }else if(!showDate){
-      message.error('发布日期不能为空')
-      return false
+  const saveArticle = () => {
+    //保存文章
+    if (!selectedType) {
+      message.error("必须选择文章类型");
+      return false;
+    } else if (!articleTitle) {
+      message.error("文章标题不能为空");
+      return false;
+    } else if (!articleContent) {
+      message.error("文章内容不能为空");
+      return false;
+    } else if (!introducemd) {
+      message.error("文章简介不能为空");
+      return false;
+    } else if (!showDate) {
+      message.error("发布日期不能为空");
+      return false;
     }
     // message.success('校验通过')
-    let dataProps={}
-    dataProps.type_id=selectedType
-    dataProps.title=articleTitle
-    dataProps.article_content=articleContent
-    dataProps.introduce=introducemd
-    let dateText=showDate.replace('-','/')
-    dataProps.addTime=(new Date(dateText).getTime())/1000
+    let dataProps = {};
+    dataProps.type_id = selectedType;
+    dataProps.title = articleTitle;
+    dataProps.article_content = articleContent;
+    dataProps.introduce = introducemd;
+    let dateText = showDate.replace("-", "/");
+    dataProps.addTime = new Date(dateText).getTime() / 1000;
 
-    if(articleId==0){//当其为0时才能添加，表示新增加，非0就应该是修改操作
-      dataProps.view_count=0;
+    if (articleId == 0) {
+      //当其为0时才能添加，表示新增加，非0就应该是修改操作
+      dataProps.view_count = 0;
       axios({
-        method:'post',
-        url:servicePath.addArticle,
-        data:dataProps,
-        withCredentials:true,//为了使中间件起作用，就要共享cookie
-      }).then(
-        res=>{
-          setArticleId(res.data.insertId)
-          if(res.data.isSuccess){//中台返回的isSuccesss是个boolean值
-            message.success('文章发布成功');
-          }else{
-            message.error('文章发布失败')
-          }
+        method: "post",
+        url: servicePath.addArticle,
+        data: dataProps,
+        withCredentials: true, //为了使中间件起作用，就要共享cookie
+      }).then((res) => {
+        setArticleId(res.data.insertId);
+        if (res.data.isSuccess) {
+          //中台返回的isSuccesss是个boolean值
+          message.success("文章发布成功");
+        } else {
+          message.error("文章发布失败");
         }
-      )
-    }else{
-      dataProps.id=articleId
+      });
+    } else {
+      dataProps.id = articleId;
       axios({
-        method:'post',
-        url:servicePath.updateArticle,
-        data:dataProps,
-        withCredentials:true
-      }).then(
-        res=>{
-          if(res.data.isSuccess){
-            message.success('文章修改成功');
-          }else{
-            message.error('文章修改失败');
-          }
+        method: "post",
+        url: servicePath.updateArticle,
+        data: dataProps,
+        withCredentials: true,
+      }).then((res) => {
+        if (res.data.isSuccess) {
+          message.success("文章修改成功");
+        } else {
+          message.error("文章修改失败");
         }
-      )
+      });
     }
-  }
+  };
+
+  const getArticleById = (id) => {
+    axios(servicePath.getArticleById + id, {
+      withCredentials: true,
+    }).then((res) => {
+      // console.log(res);
+      let articleInfo = res.data.data[0];
+      setArticleTitle(articleInfo.title);
+      setArticleContent(articleInfo.article_content);
+      let html = marked(articleInfo.article_content);
+      setMarkdownContent(html);
+      setIntroducemd(articleInfo.introduce);
+      let tmpInt = marked(articleInfo.introduce);
+      setIntroducehtml(tmpInt);
+      setShowDate(articleInfo.addTime);
+      setSelectType(articleInfo.typeId);
+    });
+  };
 
   return (
     <div>
@@ -136,16 +160,29 @@ function AddArticle(props) {
         <Col span={18}>
           <Row gutter={10}>
             <Col span={20}>
-              <Input value={articleTitle} placeholder="博客标题" size="large" onChange={(e)=>{setArticleTitle(e.target.value)}}/>
+              <Input
+                value={articleTitle}
+                placeholder="博客标题"
+                size="large"
+                onChange={(e) => {
+                  setArticleTitle(e.target.value);
+                }}
+              />
             </Col>
             <Col span={4}>
               &nbsp;
-              <Select defaultValue={selectedType} size="large" onChange={selectTypeHandler}>
-                {
-                  typeInfo.map((item,index)=>{
-                    return (<Option key={index} value={item.id}>{item.typeName}</Option>)
-                  })
-                }
+              <Select
+                defaultValue={selectedType}
+                size="large"
+                onChange={selectTypeHandler}
+              >
+                {typeInfo.map((item, index) => {
+                  return (
+                    <Option key={index} value={item.id}>
+                      {item.typeName}
+                    </Option>
+                  );
+                })}
               </Select>
             </Col>
           </Row>
@@ -153,6 +190,7 @@ function AddArticle(props) {
           <Row gutter={10}>
             <Col span={12}>
               <TextArea
+                value={articleContent}
                 className="markdown-content"
                 rows={35}
                 onChange={changeContent}
@@ -181,6 +219,7 @@ function AddArticle(props) {
             <Col span="24">
               <br />
               <TextArea
+                value={introducemd}
                 rows={4}
                 placeholder="文章简介"
                 onChange={changeIntroducer}
@@ -194,7 +233,13 @@ function AddArticle(props) {
             </Col>
             <Col span={12}>
               <div className="date-select">
-                <DatePicker placeholder="发布日期" size="large" onChange={(date,dateString)=>{setShowDate(dateString)}}/>
+                <DatePicker
+                  placeholder="发布日期"
+                  size="large"
+                  onChange={(date, dateString) => {
+                    setShowDate(dateString);
+                  }}
+                />
               </div>
             </Col>
           </Row>
