@@ -49,6 +49,7 @@ module.exports = (appInfo) => {
     },
     domainWhiteList: ["*"],
   };
+  
   config.cors = {
     origin: "http://localhost:3000",
     credentials: true, //允许cookie跨域
