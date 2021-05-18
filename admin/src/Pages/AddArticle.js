@@ -64,7 +64,7 @@ function AddArticle(props) {
       if (res.data.data == "没有登陆") {
         //来自于中间件，路由守卫
         localStorage.removeItem("openId");
-        props.history.push("/");
+        props.history.push("/");//用于未登录跳转回登陆页
       } else {
         setTypeInfo(res.data.data);
       }

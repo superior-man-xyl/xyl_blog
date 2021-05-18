@@ -31,6 +31,11 @@ class MainController extends Controller {
     }
   }
 
+  async checkOutLogin(){
+    this.ctx.session=null;
+    this.ctx.body={data:"已退出登陆"}
+  }
+
   async getTypeInfo() {
     const resType = await this.app.mysql.select("type");
     this.ctx.body = { data: resType };

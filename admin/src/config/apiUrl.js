@@ -10,6 +10,7 @@ let servicePath={
     getArticleList:ipUrl+'getArticleList', //文章列表
     delArticle:ipUrl+'delArticle/', //删除文章
     getArticleById:ipUrl+'getArticleById/',  //根据id获得文章详情
+    OutLogin:ipUrl+'checkOutLogin',//退出登陆，删除session
 }
 
 export default servicePath

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../static/css/AdminIndex.css";
-import { Layout, Menu, Breadcrumb, Affix } from "antd";
+import { Layout, Menu, Breadcrumb, Affix,message } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -11,6 +11,8 @@ import {
 import { Route } from "react-router-dom";
 import AddArticle from "./AddArticle";
 import ArticleList from "./ArticleList";
+import axios from 'axios';
+import servicePath from "../config/apiUrl";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -28,6 +30,18 @@ function AdminIndex(props) {
       props.history.push("/index/list/");
     }
   };
+
+  const handleClickOutLogin=()=>{//退出登陆
+    axios(servicePath.OutLogin, {
+      withCredentials: true,
+    }).then((res)=>{
+      if(res.data.data=='已退出登陆'){
+        message.success('退出成功')
+        props.history.push("/");
+      }
+    })
+    
+  }
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -47,8 +61,11 @@ function AdminIndex(props) {
               <Menu.Item key="addArticle">添加文章</Menu.Item>
               <Menu.Item key="articleList">文章列表</Menu.Item>
             </SubMenu>
-            <Menu.Item key="5" icon={<FileOutlined />}>
+            <Menu.Item key="5" icon={<FileOutlined />} >
               留言管理
+            </Menu.Item>
+            <Menu.Item key="5" icon={<DesktopOutlined /> } onClick={handleClickOutLogin}>
+              退出登陆
             </Menu.Item>
           </Menu>
         </Affix>
