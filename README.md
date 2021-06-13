@@ -20,3 +20,5 @@ egg-init --type=simple     使用脚手架工具生成项目基本结构
 
 # axios请求数据
 [axios请求的方式方法](http://axios-js.com/zh-cn/docs/)
+
+# sessionid作登陆的原理

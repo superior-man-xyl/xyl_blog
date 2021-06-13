@@ -18,7 +18,7 @@ function ArticleList(props) {
       method: "get",
       url: servicePath.getArticleList,
       withCredentials: true,
-      header: { "Access-Control-Allow-Origin": "*" },
+      header: { "Access-Control-Allow-Origin": "*"},
     }).then((res) => {
       console.log(res.data.list);
       setList(res.data.list);
