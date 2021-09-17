@@ -15,42 +15,41 @@ function Login(props) {
   const [isLoading, setInLoading] = useState(false);
 
   const checkLogin = () => {
-    setInLoading(true);//使其呈现loadin状态
+    setInLoading(true); //使其呈现loadin状态
     if (!userName) {
       message.error("用户名不能为空");
-      setTimeout(()=>{
-          setInLoading(false)
-      },1000);//1秒后loadin消失
+      setTimeout(() => {
+        setInLoading(false);
+      }, 1000); //1秒后loadin消失
       return false;
     } else if (!passWord) {
       message.error("密码不能为空");
-      setTimeout(()=>{
-        setInLoading(false)
-    },1000);//1秒后loadin消失
+      setTimeout(() => {
+        setInLoading(false);
+      }, 1000); //1秒后loadin消失
       return false;
     }
-    let dataProps={
-        'userName':userName,
-        'password':passWord
-    }
+    let dataProps = {
+      userName: userName,
+      password: passWord,
+    };
 
-    axios({//判断用户名和密码是否正确
-        method:'post',
-        url:servicePath.checkLogin,
-        data:dataProps,
-        withCredentials:true//共享session
-    }).then(
-        res=>{
-            console.log(res)
-            setInLoading(false)//请求到数据，得到用户名密码是否正确的结果，就解除loadin状态
-            if(res.data.data =='登录成功'){
-                localStorage.setItem('openId',res.data.openId)
-                props.history.push('/index')//登陆成功，跳转主页
-            }else{
-                message.error('用户名密码错误')
-            }
-        }
-    )
+    axios({
+      //判断用户名和密码是否正确
+      method: "post",
+      url: servicePath.checkLogin,
+      data: dataProps,
+      withCredentials: true, //共享session
+    }).then((res) => {
+      console.log(res);
+      setInLoading(false); //请求到数据，得到用户名密码是否正确的结果，就解除loadin状态
+      if (res.data.data == "登录成功") {
+        localStorage.setItem("openId", res.data.openId);
+        props.history.push("/index"); //登陆成功，跳转主页
+      } else {
+        message.error("用户名or密码错误");
+      }
+    });
   };
 
   return (

@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Menu, Affix } from "antd";
-// import {
-//   VideoCameraOutlined,
-//   HomeFilled,
-//   SmileOutlined,
-// } from "@ant-design/icons";
 import MenuItem from "antd/lib/menu/MenuItem";
 import "antd/dist/antd.css";
 import Router from "next/router";
