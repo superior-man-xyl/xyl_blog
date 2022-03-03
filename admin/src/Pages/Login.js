@@ -41,7 +41,7 @@ function Login(props) {
       data: dataProps,
       withCredentials: true, //共享session
     }).then((res) => {
-      console.log(res);
+      console.log(res, res.data.data);
       setInLoading(false); //请求到数据，得到用户名密码是否正确的结果，就解除loadin状态
       if (res.data.data == "登录成功") {
         localStorage.setItem("openId", res.data.openId);

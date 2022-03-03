@@ -4,7 +4,7 @@ const Controller = require("egg").Controller;
 
 class HomeController extends Controller {
   async index() {
-    // let result=await this.app.mysql.get("blog_content",{})
+    // let result=await this.app.mysql.get("blog_content",{}) //get是获得单条数据，这个blog_content是测试用的，没有了后来
     // console.log(result);//测试是否能读取到数据库
     // this.ctx.body=result;
     this.ctx.body = "api hi";

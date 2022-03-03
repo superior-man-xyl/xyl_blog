@@ -4,7 +4,7 @@ import Header from "../components/Header";
 import Author from "../components/Author";
 import Advert from "../components/Advert";
 import Footer from "../components/Footer";
-import { Row, Col, List, Breadcrumb } from "antd";
+import { Row, Col, List, Breadcrumb, Affix } from "antd";
 import {
   ScheduleOutlined,
   FolderOutlined,
@@ -67,7 +67,9 @@ export default function MyList(list) {
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
-          <Advert />
+          <Affix offsetTop={55}>
+            <Advert />
+          </Affix>
         </Col>
       </Row>
       <Footer />

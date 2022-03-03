@@ -51,7 +51,7 @@ module.exports = (appInfo) => {
   };
   
   config.cors = {
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",//删除origin字段，cors插件会设置请求的域名为跨域域名
     credentials: true, //允许cookie跨域
     allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS",
   };

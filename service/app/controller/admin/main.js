@@ -5,7 +5,7 @@ const Controller = require("egg").Controller;
 class MainController extends Controller {
   async index() {
     //index方法
-    this.ctx.body = "hi api";
+    this.ctx.body = "<h1 style='text-align: center;  font-size: 10vw'>hi xyl_blog's api</h1>"; // 只是为了只输入网址不出现404
   }
 
   async checkLogin() {
@@ -25,6 +25,7 @@ class MainController extends Controller {
       //登录成功,进行session缓存
       let openId = new Date().getTime();
       this.ctx.session.openId = { openId: openId };
+      console.log(this.ctx.session.openId);
       this.ctx.body = { data: "登录成功", openId: openId };
     } else {
       this.ctx.body = { data: "登录失败" };

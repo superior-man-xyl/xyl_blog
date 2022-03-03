@@ -6,7 +6,7 @@ import Advert from "../components/Advert";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import axios from "axios";
-import { Row, Col, List } from "antd";
+import { Row, Col, List, Affix } from "antd";
 import {
   ScheduleOutlined,
   FolderOutlined,
@@ -77,7 +77,9 @@ export default function Home(list) {
         </Col>
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
-          <Advert />
+          <Affix offsetTop={55}>
+            <Advert />
+          </Affix>
         </Col>
       </Row>
       <Footer />

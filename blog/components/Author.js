@@ -5,7 +5,7 @@ const Author=()=>{
     return (
         <div className="author-div comm-box">
             <div><Avatar size={100} src="../static/images/Avater.jpg" /></div>
-            <div>蟹黄饱</div>
+            <div>吃蟹黄的Thilo</div>
             <div className="author-introduction">
             蟹黄吃到饱，前端搞的好，一个梦想能吃蟹黄吃到饱的前端程序员
             </div>
