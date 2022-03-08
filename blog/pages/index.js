@@ -95,5 +95,5 @@ Home.getInitialProps = async () => {
       resolve(res.data);
     });
   });
-  return await promise; // await 解析出值
+  return await promise; // await 解析出值，async里必须有返回值
 };
