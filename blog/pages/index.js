@@ -43,7 +43,7 @@ export default function Home(list) {
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={24} lg={18} xl={14}>
           <List
-            header={<div>最新日志</div>}
+            header={<div>分享贴如下</div>}
             itemLayout="vertical"
             dataSource={mylist}
             renderItem={(item) => (

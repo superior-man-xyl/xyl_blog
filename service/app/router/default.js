@@ -9,4 +9,5 @@ module.exports = (app) => {
   );
   router.get("/default/getTypeInfo", controller.default.home.getTypeInfo);
   router.get("/default/getListById/:id", controller.default.home.getListById);
+  router.get("/default/getSearchList/:searchValue", controller.default.home.getSearchList);
 };

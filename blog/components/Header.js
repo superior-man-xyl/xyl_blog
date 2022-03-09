@@ -44,7 +44,10 @@ const Header = () => {
 
     // 点击搜索的回调函数
     const handleSearch=()=>{
-     console.log('搜索的值为',searchInput);
+    //  console.log('搜索的值为',searchInput);
+      if(searchInput.length>0){
+        Router.push('/searchResult?searchValue='+searchInput);
+      }
     }
 
   return (
