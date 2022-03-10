@@ -7,8 +7,9 @@ let servicePath={
     getArtcleById:ipUrl+'getArtcleById/', //详细页接口
     getTypeInfo:ipUrl+'getTypeInfo',//文章类别接口
     getListById:ipUrl+'getListById/',//根据类别ID获得文章列表
-    getIcon:'//at.alicdn.com/t/font_2524465_mcugscgow7n.js',
+    getIcon:'//at.alicdn.com/t/font_3236488_vkp4qu4eg38.js',
     getSearchList:ipUrl+'getSearchList/',//搜索结果接口
+    getToolsInfo:ipUrl+'getToolsInfo',//工具列表
 }
 
 export default servicePath

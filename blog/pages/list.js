@@ -33,7 +33,7 @@ export default function MyList(list) {
               <Breadcrumb.Item>
                 <a href="/">首页</a>
               </Breadcrumb.Item>
-              <Breadcrumb.Item>视频教程</Breadcrumb.Item>
+              <Breadcrumb.Item>文章教程</Breadcrumb.Item>
             </Breadcrumb>
           </div>
           <List

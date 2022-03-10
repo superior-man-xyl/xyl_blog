@@ -6,7 +6,7 @@ import Router from "next/router";
 import Link from "next/link";
 import axios from "axios";
 import servicePath from "../config/apiUrl";
-import { createFromIconfontCN } from '@ant-design/icons';
+import { createFromIconfontCN } from '@ant-design/icons/lib';
 
 const { Search } = Input;
 
@@ -36,9 +36,12 @@ const Header = () => {
     //点击跳转的方法
     const handleClick=(e)=>{
         if(e.key==0){
-            Router.push('/')
+            Router.push('/');
+        }else if(e.key==3){
+          Router.push('/toolNavigation');
         }else{
-            Router.push('/list?id='+e.key)
+          // let key = e.key+1; 
+          Router.push('/list?id='+e.key);
         }
     }
 
