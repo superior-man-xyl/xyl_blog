@@ -90,6 +90,18 @@ class HomeController extends Controller {
     const result = await this.app.mysql.select("tools");
     this.ctx.body = { data: result };
   }
+
+  //上传评论，待写
+  async addSuggestion() {
+    let tmpArticle = this.ctx.request.body;
+    const result = await this.app.mysql.insert("article", tmpArticle);
+    const insertSuccess = result.affectedRows === 1;
+    const insertId = result.insertId;
+    this.ctx.body={
+        isSuccess:insertSuccess,
+        insertId:insertId
+    }
+  }
 }
 
 module.exports = HomeController;

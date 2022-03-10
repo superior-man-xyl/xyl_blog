@@ -17,7 +17,9 @@ import Link from "next/link";
 
 export default function searchResultList(list) {
     const [mylist, setMylist] = useState(list.data);
-
+    useEffect(() => {
+      setMylist(list.data); //重新搜索时。替换list
+    },list.data);
     return (
       <div>
         <Head>
