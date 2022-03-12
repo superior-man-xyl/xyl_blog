@@ -91,7 +91,7 @@ class HomeController extends Controller {
     this.ctx.body = { data: result };
   }
 
-  //上传评论，待写
+  //上传评论，待写 
   async addSuggestion() {
     let tmpArticle = this.ctx.request.body;
     const result = await this.app.mysql.insert("article", tmpArticle);

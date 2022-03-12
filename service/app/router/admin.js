@@ -10,5 +10,12 @@ module.exports=app=>{
     router.get('/admin/getArticleList', adminauth, controller.admin.main.getArticleList)
     router.get('/admin/delArticle/:id', adminauth, controller.admin.main.delArticle)
     router.get('/admin/getArticleById/:id', adminauth, controller.admin.main.getArticleById)
+    router.post('/admin/addTool', adminauth, controller.admin.main.addTool)//添加工具的接口
+    router.post('/admin/updateTool', adminauth, controller.admin.main.updateTool)//修改工具的接口
+    router.get('/admin/getToolsList', adminauth, controller.admin.main.getToolsList)
+    router.get('/admin/delTool/:id', adminauth, controller.admin.main.delTool)
+    router.get('/admin/getToolById/:id', adminauth, controller.admin.main.getToolById)
+    router.get('/admin/getSuggestionsList', adminauth, controller.admin.main.getSuggestionsList)
+    router.get('/admin/delSuggestion/:id', adminauth, controller.admin.main.delSuggestion)
     router.get('/admin/checkOutLogin', controller.admin.main.checkOutLogin)
 }

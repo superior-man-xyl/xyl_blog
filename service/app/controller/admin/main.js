@@ -25,7 +25,7 @@ class MainController extends Controller {
       //登录成功,进行session缓存
       let openId = new Date().getTime();
       this.ctx.session.openId = { openId: openId };
-      console.log(this.ctx.session.openId);
+      console.log(this.ctx.session.openId, '登陆成功');
       this.ctx.body = { data: "登录成功", openId: openId };
     } else {
       this.ctx.body = { data: "登录失败" };
@@ -67,6 +67,7 @@ class MainController extends Controller {
     let sql = 'SELECT article.id as id,'+
                 'article.title as title,'+
                 'article.introduce as introduce,'+
+                'article.view_count as view_count,'+
                 "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime,"+
                 'type.typeName as typeName '+
                 'FROM article LEFT JOIN type ON article.type_id = type.Id '+
@@ -96,6 +97,68 @@ class MainController extends Controller {
     const result =await this.app.mysql.query(sql)
     this.ctx.body={data:result}
   }
+
+  async getToolsList() {
+    const resType = await this.app.mysql.select("tools");
+    this.ctx.body = { data: resType };
+  }
+
+  async getToolById(){ 
+    let id=this.ctx.params.id
+    console.log(id,'---------获取工具id');
+    const result =await this.app.mysql.get('tools', { 'id': id });
+    this.ctx.body={data:result}
+  }
+
+  async addTool() {
+    let tmpTool = this.ctx.request.body;
+    const result = await this.app.mysql.insert("tools", tmpTool);
+    const insertSuccess = result.affectedRows === 1;
+    const insertId = result.insertId;
+    this.ctx.body={
+        isSuccess:insertSuccess,
+        insertId:insertId
+    }
+  }
+
+  //修改工具内容
+  async updateTool(){
+    let tempTool=this.ctx.request.body
+    const result=await this.app.mysql.update('tools',tempTool)
+    const updateSuccess=result.affectedRows===1
+    this.ctx.body={
+        isSuccess:updateSuccess
+    }
+}
+
+  async delTool(){
+    let id=this.ctx.params.id
+    const res=await this.app.mysql.delete('tools',{'id':id})
+    this.ctx.body={data:res}
+  }
+
+  async Suggestion() { //用于发布留言
+    let tmpTool = this.ctx.request.body;
+    const result = await this.app.mysql.insert("suggestion", tmpTool);
+    const insertSuccess = result.affectedRows === 1;
+    const insertId = result.insertId;
+    this.ctx.body={
+        isSuccess:insertSuccess,
+        insertId:insertId
+    }
+  }
+
+  async getSuggestionsList() { // 获取留言列表
+    const resType = await this.app.mysql.select("suggestion");
+    this.ctx.body = { data: resType };
+  }
+
+  async delSuggestion(){ //删除某些留言
+    let id=this.ctx.params.id
+    const res=await this.app.mysql.delete('suggestion',{'id':id})
+    this.ctx.body={data:res}
+  }
+
 }
 
 module.exports = MainController;
