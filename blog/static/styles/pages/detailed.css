@@ -86,3 +86,8 @@ iframe{
 .ant-anchor-wrapper{
     padding: 5px !important;
 }
+
+.btn-suggestion{
+    margin-left: 3rem;
+    margin-top: 1rem;
+}

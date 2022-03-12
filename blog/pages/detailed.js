@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
-import { Row, Col, Breadcrumb, Affix } from "antd";
+import { Row, Col, Breadcrumb, Affix, Drawer, Form, Input, Button, message, Space } from "antd";
 import {
   ScheduleOutlined,
   FolderOutlined,
@@ -20,6 +20,40 @@ import Tocify from "../components/tocify.tsx";
 import servicePath from "../config/apiUrl";
 
 const Detailed = (props) => {
+  const [visible, setVisible] = useState(false);
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  const onFinish = (values) => {
+    console.log(values.suggest,'留言提交');
+    let dataProps = values.suggest;
+    dataProps.articleUrl = window.location.href;
+    axios({
+      method: "post",
+      url: servicePath.addSuggestion,
+      data: dataProps,
+      withCredentials: true,
+    }).then((res) => {
+      if (res.data.isSuccess) {
+        message.success("留言发布成功, 等待作者私聊");
+      } else {
+        message.error("留言发布失败");
+      }
+    });
+  }
+
   const tocify = new Tocify();
   const renderer = new marked.Renderer();
 
@@ -86,6 +120,44 @@ const Detailed = (props) => {
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
           <div>
+            <Drawer
+              title="填写下面的表单，作者就会在后台看到哦"
+              placement="left"
+              width={500}
+              onClose={onClose}
+              visible={visible}
+            >
+              <Form {...layout} name="tool" onFinish={onFinish}>
+                <Form.Item
+                  name={["suggest", "email"]}
+                  label="个人邮箱"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+                
+                <Form.Item
+                  name={["suggest", "comment"]}
+                  label="留言内容"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input.TextArea />
+                </Form.Item>
+                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                  <Button type="primary" htmlType="submit">
+                    提交
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Drawer>
             <div className="bread-div">
               <Breadcrumb>
                 <Breadcrumb.Item>
@@ -123,11 +195,18 @@ const Detailed = (props) => {
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
           <Author />
           <Affix offsetTop={55}>
-          <Advert />
+            <Advert />
             <div className="detailed-nav comm-box">
               <div className="nav-title">文章目录</div>
               <div className="toc-list">{tocify && tocify.render()}</div>
             </div>
+            <Button
+              type="primary"
+              onClick={showDrawer}
+              className="btn-suggestion"
+            >
+              给文章留言吧！
+            </Button>
           </Affix>
         </Col>
       </Row>
