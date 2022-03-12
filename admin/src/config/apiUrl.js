@@ -15,6 +15,8 @@ let servicePath = {
   getToolById: ipUrl + "getToolById/", //根据id获得工具详情
   addTool: ipUrl + "addTool", //添加工具
   updateTool: ipUrl + "updateTool", //修改工具
+  getSuggestionsList: ipUrl+ "getSuggestionsList", //获取留言列表
+  delSuggestion: ipUrl+ "delSuggestion/", //删除留言
   OutLogin: ipUrl + "checkOutLogin", //退出登陆，删除session
 };
 

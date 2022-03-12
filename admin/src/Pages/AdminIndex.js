@@ -12,7 +12,8 @@ import { Route } from "react-router-dom";
 import AddArticle from "./AddArticle";
 import ArticleList from "./ArticleList";
 import AddTools from "./AddTools";
-import ToolsList from "./ToolsList"
+import ToolsList from "./ToolsList";
+import SuggestionList from "./SuggestionList";
 import axios from 'axios';
 import servicePath from "../config/apiUrl";
 const { Header, Content, Footer, Sider } = Layout;
@@ -50,7 +51,10 @@ function AdminIndex(props) {
         props.history.push("/");
       }
     })
-    
+  };
+
+  const handleClickSuggestion=()=>{//留言管理
+    props.history.push("/index/SuggestionList/");
   }
 
   return (
@@ -71,7 +75,7 @@ function AdminIndex(props) {
               <Menu.Item key="addArticle">添加文章</Menu.Item>
               <Menu.Item key="articleList">文章列表</Menu.Item>
             </SubMenu>
-            <Menu.Item key="sub2" icon={<FileOutlined />} >
+            <Menu.Item key="sub2" icon={<FileOutlined />} onClick={handleClickSuggestion}>
               留言管理
             </Menu.Item>
             <SubMenu
@@ -109,6 +113,7 @@ function AdminIndex(props) {
                 <Route path="/index/addTools/" exact component={AddTools} />
                 <Route path="/index/addTools/:id" exact component={AddTools} />
                 <Route path="/index/ToolsList/" exact component={ToolsList} />
+                <Route path="/index/SuggestionList/" exact component={SuggestionList} />
               </div>
             </div>
           </Content>
