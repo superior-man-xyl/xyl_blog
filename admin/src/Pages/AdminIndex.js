@@ -5,12 +5,14 @@ import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
+  SlidersOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Route } from "react-router-dom";
 import AddArticle from "./AddArticle";
 import ArticleList from "./ArticleList";
+import AddTools from "./AddTools";
+import ToolsList from "./ToolsList"
 import axios from 'axios';
 import servicePath from "../config/apiUrl";
 const { Header, Content, Footer, Sider } = Layout;
@@ -24,10 +26,18 @@ function AdminIndex(props) {
   };
 
   const handleClickArticle = (e) => {
-    if (e.key == "addArticle") {
+    if (e.key === "addArticle") {
       props.history.push("/index/add/");
     } else {
       props.history.push("/index/list/");
+    }
+  };
+
+  const handleClickTools = (e) => {
+    if (e.key === "addTool") {
+      props.history.push("/index/addTools/");
+    } else {
+      props.history.push("/index/ToolsList/");
     }
   };
 
@@ -35,7 +45,7 @@ function AdminIndex(props) {
     axios(servicePath.OutLogin, {
       withCredentials: true,
     }).then((res)=>{
-      if(res.data.data=='已退出登陆'){
+      if(res.data.data==='已退出登陆'){
         message.success('退出成功')
         props.history.push("/");
       }
@@ -61,10 +71,19 @@ function AdminIndex(props) {
               <Menu.Item key="addArticle">添加文章</Menu.Item>
               <Menu.Item key="articleList">文章列表</Menu.Item>
             </SubMenu>
-            <Menu.Item key="5" icon={<FileOutlined />} >
+            <Menu.Item key="sub2" icon={<FileOutlined />} >
               留言管理
             </Menu.Item>
-            <Menu.Item key="5" icon={<DesktopOutlined /> } onClick={handleClickOutLogin}>
+            <SubMenu
+              key="sub3"
+              icon={<SlidersOutlined />}
+              title="推荐工具管理"
+              onClick={handleClickTools}
+            >
+              <Menu.Item key="addTool">添加工具</Menu.Item>
+              <Menu.Item key="toolList">工具列表</Menu.Item>
+            </SubMenu>
+            <Menu.Item key="sub4" icon={<DesktopOutlined /> } onClick={handleClickOutLogin}>
               退出登陆
             </Menu.Item>
           </Menu>
@@ -87,6 +106,9 @@ function AdminIndex(props) {
                 <Route path="/index/add/" exact component={AddArticle} />
                 <Route path="/index/add/:id" exact component={AddArticle} />
                 <Route path="/index/list/" exact component={ArticleList} />
+                <Route path="/index/addTools/" exact component={AddTools} />
+                <Route path="/index/addTools/:id" exact component={AddTools} />
+                <Route path="/index/ToolsList/" exact component={ToolsList} />
               </div>
             </div>
           </Content>

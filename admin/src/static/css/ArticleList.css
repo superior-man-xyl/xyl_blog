@@ -1,3 +1,4 @@
 .list-div{
     width: 100%;
+    overflow-wrap: break-word;
 }

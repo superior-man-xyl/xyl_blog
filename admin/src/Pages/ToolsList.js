@@ -6,7 +6,7 @@ import "../static/css/ArticleList.css";
 
 const { confirm } = Modal;
 
-function ArticleList(props) {
+function ToolsList(props) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -16,24 +16,24 @@ function ArticleList(props) {
   const getList = () => {
     axios({
       method: "get",
-      url: servicePath.getArticleList,
+      url: servicePath.getToolsList,
       withCredentials: true,
       header: { "Access-Control-Allow-Origin": "*"},
     }).then((res) => {
-      console.log(res.data.list);
-      setList(res.data.list);
+      console.log(res.data.data); 
+      setList(res.data.data);
     });
   };
 
-  //删除文章
+  //删除工具
   const delArticle = (id, title) => {
     confirm({
-      title: `确定要删除《${title}》吗？`,
+      title: `确定要删除"${title}"吗？`,
       content: "如果点击确认，则将永久删除",
       onOk() {
-        axios(servicePath.delArticle + id, { withCredentials: true }).then(
+        axios(servicePath.delTool + id, { withCredentials: true }).then(
           (res) => {
-            message.success("文章删除成功");
+            message.success("工具删除成功");
             getList(); //刷新页面，如果要优化性能就只操作list
           }
         );
@@ -45,9 +45,9 @@ function ArticleList(props) {
   };
 
   //修改文章
-  const updateArticle = (id, checked) => {
+  const updataTool = (id) => {
     //   console.log(id,'-=-=-=-=')
-    props.history.push("/index/add/" + id);
+    props.history.push("/index/addTools/" + id);
   };
 
   return (
@@ -55,23 +55,20 @@ function ArticleList(props) {
       <List
         header={
           <Row className="list-div">
-            <Col span={8}>
-              <b>标题</b>
-            </Col>
             <Col span={3}>
-              <b>类别</b>
+              <b>工具名</b>
             </Col>
-            <Col span={3}>
-              <b>发布时间</b>
+            <Col span={7}>
+              <b>介绍</b>
             </Col>
-            <Col span={3}>
-              <b>集数</b>
+            <Col span={5}>
+              <b>封面图片</b>
             </Col>
-            <Col span={3}>
-              <b>浏览量</b>
+            <Col span={4}>
+              <b>工具链接</b>
             </Col>
 
-            <Col span={4}>
+            <Col span={5}>
               <b>操作</b>
             </Col>
           </Row>
@@ -81,19 +78,16 @@ function ArticleList(props) {
         renderItem={(item) => (
           <List.Item>
             <Row className="list-div">
-              <Col span={8}>{item.title}</Col>
-              <Col span={3}>{item.typeName}</Col>
-              <Col span={3}>{item.addTime}</Col>
-              <Col span={3}>
-                共<span>{item.part_count}</span>集
-              </Col>
-              <Col span={3}>{item.view_count}</Col>
+              <Col span={3}>{item.title}</Col>
+              <Col span={7}>{item.detail}</Col>
+              <Col span={5}>{item.urlImg}</Col>
+              <Col span={4}>{item.link}</Col>
 
-              <Col span={4}>
+              <Col span={5}>
                 <Button
                   type="primary"
                   onClick={() => {
-                    return updateArticle(item.id);
+                    return updataTool(item.id);
                   }}
                 >
                   修改
@@ -115,4 +109,4 @@ function ArticleList(props) {
   );
 }
 
-export default ArticleList;
+export default ToolsList;

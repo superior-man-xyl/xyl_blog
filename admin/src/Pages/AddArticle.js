@@ -17,7 +17,7 @@ function AddArticle(props) {
   const [showDate, setShowDate] = useState(); //发布日期
   const [updateDate, setUpdateDate] = useState(); //修改日志的日期
   const [typeInfo, setTypeInfo] = useState([]); // 文章类别信息
-  const [selectedType, setSelectType] = useState(1); //选择的文章类别
+  const [selectedType, setSelectType] = useState("选择类型"); //选择的文章类别
 
   useEffect(() => {
     getTypeInfo(); //获得了文章分类信息
@@ -61,10 +61,10 @@ function AddArticle(props) {
       headers: { "Access-Control-Allow-Origin": "*" },
       withCredentials: true,
     }).then((res) => {
-      if (res.data.data == "没有登陆") {
+      if (res.data.data === "没有登陆") {
         //来自于中间件，路由守卫
         localStorage.removeItem("openId");
-        props.history.push("/");//用于未登录跳转回登陆页
+        props.history.push("/"); //用于未登录跳转回登陆页
       } else {
         setTypeInfo(res.data.data);
       }
@@ -177,11 +177,13 @@ function AddArticle(props) {
                 onChange={selectTypeHandler}
               >
                 {typeInfo.map((item, index) => {
-                  return (
-                    <Option key={index} value={item.id}>
-                      {item.typeName}
-                    </Option>
-                  );
+                  if (item.typeName !== "工具推荐") {
+                    return (
+                      <Option key={index} value={item.id}>
+                        {item.typeName}
+                      </Option>
+                    );
+                  }
                 })}
               </Select>
             </Col>
@@ -234,6 +236,7 @@ function AddArticle(props) {
             <Col span={12}>
               <div className="date-select">
                 <DatePicker
+                  style={{ width: 150 }}
                   placeholder="发布日期"
                   size="large"
                   onChange={(date, dateString) => {

@@ -43,7 +43,7 @@ function Login(props) {
     }).then((res) => {
       console.log(res, res.data.data);
       setInLoading(false); //请求到数据，得到用户名密码是否正确的结果，就解除loadin状态
-      if (res.data.data == "登录成功") {
+      if (res.data.data === "登录成功") {
         localStorage.setItem("openId", res.data.openId);
         props.history.push("/index"); //登陆成功，跳转主页
       } else {
