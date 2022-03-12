@@ -35,9 +35,9 @@ const Header = () => {
 
     //点击跳转的方法
     const handleClick=(e)=>{
-        if(e.key==0){
+        if(e.key==='0'){
             Router.push('/');
-        }else if(e.key==3){
+        }else if(e.key==='3'){
           Router.push('/toolNavigation');
         }else{
           // let key = e.key+1; 
