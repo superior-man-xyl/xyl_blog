@@ -137,17 +137,6 @@ class MainController extends Controller {
     this.ctx.body={data:res}
   }
 
-  async Suggestion() { //用于发布留言
-    let tmpTool = this.ctx.request.body;
-    const result = await this.app.mysql.insert("suggestion", tmpTool);
-    const insertSuccess = result.affectedRows === 1;
-    const insertId = result.insertId;
-    this.ctx.body={
-        isSuccess:insertSuccess,
-        insertId:insertId
-    }
-  }
-
   async getSuggestionsList() { // 获取留言列表
     const resType = await this.app.mysql.select("suggestion");
     this.ctx.body = { data: resType };

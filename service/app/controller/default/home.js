@@ -63,7 +63,8 @@ class HomeController extends Controller {
       "article.view_count as view_count ," +
       "type.typeName as typeName " +
       "FROM article LEFT JOIN type ON article.type_id = type.id " +
-      "WHERE type_id=" + id;
+      "WHERE type_id=" +
+      id;
     const result = await this.app.mysql.query(sql);
     this.ctx.body = { data: result };
   }
@@ -78,7 +79,7 @@ class HomeController extends Controller {
       "FROM_UNIXTIME(article.addTime,'%Y-%m-%d %H:%i:%s') as addTime," +
       "article.view_count as view_count," +
       "type.typeName as typeName " +
-      "FROM article LEFT JOIN type ON article.type_id = type.Id"+
+      "FROM article LEFT JOIN type ON article.type_id = type.Id" +
       ` WHERE title LIKE '%${searchValue}%'`;
 
     const results = await this.app.mysql.query(sql);
@@ -91,16 +92,16 @@ class HomeController extends Controller {
     this.ctx.body = { data: result };
   }
 
-  //上传评论，待写 
   async addSuggestion() {
-    let tmpArticle = this.ctx.request.body;
-    const result = await this.app.mysql.insert("article", tmpArticle);
+    //用于发布留言
+    let tmpSuggestion = this.ctx.request.body;
+    const result = await this.app.mysql.insert("suggestion", tmpSuggestion);
     const insertSuccess = result.affectedRows === 1;
     const insertId = result.insertId;
-    this.ctx.body={
-        isSuccess:insertSuccess,
-        insertId:insertId
-    }
+    this.ctx.body = {
+      isSuccess: insertSuccess,
+      insertId: insertId,
+    };
   }
 }
 
