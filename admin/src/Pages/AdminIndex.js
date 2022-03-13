@@ -21,6 +21,7 @@ const { SubMenu } = Menu;
 
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false);
+  const [BreadcrumbTitle,setBreadcrumbTitle] = useState('工作台')
 
   const onCollapse = (collapsed) => {
     setCollapsed(collapsed);
@@ -29,16 +30,20 @@ function AdminIndex(props) {
   const handleClickArticle = (e) => {
     if (e.key === "addArticle") {
       props.history.push("/index/add/");
+      setBreadcrumbTitle('添加文章');
     } else {
       props.history.push("/index/list/");
+      setBreadcrumbTitle('文章列表');
     }
   };
 
   const handleClickTools = (e) => {
     if (e.key === "addTool") {
       props.history.push("/index/addTools/");
+      setBreadcrumbTitle('添加工具');
     } else {
       props.history.push("/index/ToolsList/");
+      setBreadcrumbTitle('工具列表');
     }
   };
 
@@ -55,6 +60,7 @@ function AdminIndex(props) {
 
   const handleClickSuggestion=()=>{//留言管理
     props.history.push("/index/SuggestionList/");
+    setBreadcrumbTitle('留言管理');
   }
 
   return (
@@ -99,7 +105,7 @@ function AdminIndex(props) {
           <Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>后台管理</Breadcrumb.Item>
-              <Breadcrumb.Item>工作台</Breadcrumb.Item>
+              <Breadcrumb.Item>{BreadcrumbTitle}</Breadcrumb.Item>
             </Breadcrumb>
             <div
               className="site-layout-background"

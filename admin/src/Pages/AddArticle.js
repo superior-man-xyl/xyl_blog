@@ -170,14 +170,16 @@ function AddArticle(props) {
               />
             </Col>
             <Col span={4}>
-              &nbsp;
               <Select
                 defaultValue={selectedType}
                 size="large"
                 onChange={selectTypeHandler}
               >
                 {typeInfo.map((item, index) => {
-                  if (item.typeName !== "工具推荐" && item.typeName !== "首页") {
+                  if (
+                    item.typeName !== "工具推荐" &&
+                    item.typeName !== "首页"
+                  ) {
                     return (
                       <Option key={index} value={item.id}>
                         {item.typeName}

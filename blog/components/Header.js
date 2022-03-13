@@ -64,8 +64,8 @@ const Header = () => {
           <Col xs={0} sm={0} md={0} lg={8} xl={8}>
             <Search className="SearchInput" onChange={(e)=>{setSearchInput(e.target.value)}} onSearch={handleSearch} placeholder="请输入搜索内容" enterButton="搜索" size="large"/>
           </Col>
-          <Col xs={0} sm={0} md={10} lg={8} xl={8}>
-            <Menu mode="horizontal" onClick={handleClick}>
+          <Col xs={0} sm={0} md={10} lg={8} xl={8} >
+            <Menu mode="horizontal" onClick={handleClick} className="header_menu">
                {
                 navArray.map((item,index)=>{
                     return (

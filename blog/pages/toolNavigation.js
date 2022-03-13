@@ -20,7 +20,7 @@ export default function searchResultList(list) {
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
-        <Col className="comm-left" xs={24} sm={24} md={24} lg={18} xl={14}>
+        <Col className="comm-left tool-left" xs={24} sm={24} md={24} lg={18} xl={14}>
           <List
             header={<div>前端常用工具推荐</div>}
             grid={{ gutter: 6, column: 3 }}

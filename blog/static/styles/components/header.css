@@ -1,5 +1,6 @@
 .header {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #EBD671;
     padding: 0.4rem;
     overflow: hidden;
     height: 3.3rem;
@@ -32,4 +33,8 @@
 
 .SearchInput{
     padding-right: 3rem;
+}
+
+.header_menu{
+    background-color: #EBD671;
 }

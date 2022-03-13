@@ -1,13 +1,17 @@
+.ant-layout-header{
+    height: 0;
+}
+
 .markdown-content{
     font-size:16px !important;
-    max-height: 45%;
+    max-height: 48%;
 }
 .show-html{
     padding:10px;
     border:1px solid #ddd;
     border-radius: 5px;
     font-size:16px;
-    height: 45%;
+    height: 48%;
     background-color: #f0f0f0;
     overflow: auto;
 }

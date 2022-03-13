@@ -1,13 +1,21 @@
 body{
-    background-color: #f6f6f6;  
+    /* background-color: #f6f6f6;   */
+    background-color: #72C89E;
   }
   
   .comm-left{
     background-color: #FFF;
+    background-image: url('../../images/bg.png');
     padding:.3rem;
     border-radius: .3rem;
     border:1px solid #eee;
   }
+
+  .tool-left{
+    background-color: rgb(244, 245, 245);
+    background-image: none;
+  }
+
   .comm-box{
     background-color: #FFF;
     margin-left: .5rem;
@@ -22,7 +30,7 @@ body{
   }
   .list-title{
     font-size:1.3rem;
-    color: #1e90ff;
+    color: #4F81C7;
     padding: 0 0.5rem;
 }
 .list-context{
@@ -31,7 +39,7 @@ body{
 }
 .list-icon{
     padding:.5rem 0;
-    color:#AAA;
+    color:#00A79D;
 }
 .list-icon span{
     display: inline-block;
