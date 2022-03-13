@@ -12,4 +12,5 @@ module.exports = (app) => {
   router.get("/default/getSearchList/:searchValue", controller.default.home.getSearchList);
   router.get("/default/getToolsInfo", controller.default.home.getToolsInfo);
   router.post("/default/addSuggestion", controller.default.home.addSuggestion);
+  router.get("/default/addViewCount/:id", controller.default.home.addViewCount);
 };

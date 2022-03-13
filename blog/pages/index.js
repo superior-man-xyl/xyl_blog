@@ -63,7 +63,7 @@ export default function Home(list) {
                     <FolderOutlined /> {item.typeName}{" "}
                   </span>
                   <span>
-                    <TeamOutlined /> {item.view_count}人{" "}
+                    <TeamOutlined /> {item.view_count}{" "}人{" "}
                   </span>
                 </div>
                 <div

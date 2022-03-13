@@ -103,6 +103,16 @@ class HomeController extends Controller {
       insertId: insertId,
     };
   }
+
+  async addViewCount() { //访问人数增加
+    let id = this.ctx.params.id;
+    let sql =
+      "UPDATE article SET view_count=view_count+1 " +
+      "WHERE id=" +
+      id;
+    const result = await this.app.mysql.query(sql);
+    this.ctx.body = { data: result };
+  }
 }
 
 module.exports = HomeController;

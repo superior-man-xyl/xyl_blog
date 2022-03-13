@@ -181,7 +181,7 @@ const Detailed = (props) => {
                   <FolderOutlined /> {props.typeName}{" "}
                 </span>
                 <span>
-                  <TeamOutlined /> {props.view_count}人{" "}
+                  <TeamOutlined /> {props.view_count}{" "}人{" "}
                 </span>
               </div>
               <div
@@ -227,6 +227,8 @@ Detailed.getInitialProps = async (context) => {
       resolve(res.data.data[0]);
     });
   });
+
+  axios(servicePath.addViewCount + id);//观看人数
   return await promise;
 };
 
