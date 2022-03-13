@@ -11,6 +11,7 @@ let servicePath = {
   getSearchList: ipUrl + "getSearchList/", //搜索结果接口
   getToolsInfo: ipUrl + "getToolsInfo", //工具列表
   addSuggestion: ipUrl + "addSuggestion", //添加留言
+  addViewCount: ipUrl + "addViewCount/", //访问是添加访问次数
 };
 
 export default servicePath;

@@ -164,24 +164,24 @@ const Detailed = (props) => {
                   <a href="/">首页</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                  <a href="/list">文章列表</a>
+                  <a href={`/list${props.typeId==0?'':`?id=${props.typeId}`}`}>{props.typeName}</a>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                  <a href="/">xxxxx</a>
+                  <a href="/">{props.title}</a>
                 </Breadcrumb.Item>
               </Breadcrumb>
             </div>
             <div>
-              <div className="detailed-title">React实战视频教程</div>
+              <div className="detailed-title">{props.title}</div>
               <div className="list-icon center">
                 <span>
-                  <ScheduleOutlined /> 2019-06-28{" "}
+                  <ScheduleOutlined /> {props.addTime}{" "}
                 </span>
                 <span>
-                  <FolderOutlined /> 视频教程{" "}
+                  <FolderOutlined /> {props.typeName}{" "}
                 </span>
                 <span>
-                  <TeamOutlined /> 5498人{" "}
+                  <TeamOutlined /> {props.view_count}人{" "}
                 </span>
               </div>
               <div
@@ -227,7 +227,6 @@ Detailed.getInitialProps = async (context) => {
       resolve(res.data.data[0]);
     });
   });
-
   return await promise;
 };
 
