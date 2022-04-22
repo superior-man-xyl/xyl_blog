@@ -7,6 +7,7 @@ import {
   FileOutlined,
   SlidersOutlined,
   UserOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import { Route } from "react-router-dom";
 import AddArticle from "./AddArticle";
@@ -14,6 +15,7 @@ import ArticleList from "./ArticleList";
 import AddTools from "./AddTools";
 import ToolsList from "./ToolsList";
 import SuggestionList from "./SuggestionList";
+import ChangePassword from "./ChangePassword";
 import axios from 'axios';
 import servicePath from "../config/apiUrl";
 const { Header, Content, Footer, Sider } = Layout;
@@ -63,6 +65,11 @@ function AdminIndex(props) {
     setBreadcrumbTitle('留言管理');
   }
 
+  const handleClickChangepassword=()=>{ //修改密码
+    props.history.push("/index/ChangePassword/");
+    setBreadcrumbTitle('修改密码');
+  }
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
@@ -93,7 +100,10 @@ function AdminIndex(props) {
               <Menu.Item key="addTool">添加工具</Menu.Item>
               <Menu.Item key="toolList">工具列表</Menu.Item>
             </SubMenu>
-            <Menu.Item key="sub4" icon={<DesktopOutlined /> } onClick={handleClickOutLogin}>
+            <Menu.Item key="sub4" icon={<EditOutlined /> } onClick={handleClickChangepassword}>
+              修改密码
+            </Menu.Item>
+            <Menu.Item key="sub5" icon={<DesktopOutlined /> } onClick={handleClickOutLogin}>
               退出登陆
             </Menu.Item>
           </Menu>
@@ -120,6 +130,7 @@ function AdminIndex(props) {
                 <Route path="/index/addTools/:id" exact component={AddTools} />
                 <Route path="/index/ToolsList/" exact component={ToolsList} />
                 <Route path="/index/SuggestionList/" exact component={SuggestionList} />
+                <Route path="/index/ChangePassword/" exact component={ChangePassword} />
               </div>
             </div>
           </Content>

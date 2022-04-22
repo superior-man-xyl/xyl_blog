@@ -31,7 +31,7 @@ function AddTools(props) {
       setUrlImg(ToolInfo.urlImg);
       setlink(ToolInfo.link);
       setDetail(ToolInfo.detail);
-      console.log(detail);
+      console.log(ToolInfo,'+++++++ToolInfo++++');
     });
   };
 

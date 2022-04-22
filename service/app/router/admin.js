@@ -18,4 +18,6 @@ module.exports=app=>{
     router.get('/admin/getSuggestionsList', adminauth, controller.admin.main.getSuggestionsList)
     router.get('/admin/delSuggestion/:id', adminauth, controller.admin.main.delSuggestion)
     router.get('/admin/checkOutLogin', controller.admin.main.checkOutLogin)
+    router.post('/admin/checkAccount', controller.admin.main.checkAccount)
+    router.post('/admin/fixAccount', controller.admin.main.fixAccount)
 }
