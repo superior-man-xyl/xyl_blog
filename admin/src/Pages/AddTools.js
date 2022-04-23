@@ -6,10 +6,8 @@ import servicePath from "../config/apiUrl";
 
 function AddTools(props) {
   const [toolsId, setToolsId] = useState("0"); //默认为0，如果传了那么就会有其它值，因为数据库里是从1开始的
-  const [title, setTitle] = useState("");
-  const [urlImg, setUrlImg] = useState("");
-  const [link, setlink] = useState("");
-  const [detail, setDetail] = useState("");
+
+  const [form] = Form.useForm();
 
   useEffect(() => {
     let tmpId = props.match.params.id; // 获取传过来的id
@@ -19,7 +17,7 @@ function AddTools(props) {
       setToolsId(tmpId);
       getToolById(tmpId); //获得相应id的工具的信息
     }
-  },[]);
+  }, []);
 
   const getToolById = (tmpId) => {
     axios(servicePath.getToolById + tmpId, {
@@ -27,10 +25,14 @@ function AddTools(props) {
     }).then((res) => {
       // console.log(res.data.data);
       let ToolInfo = res.data.data;
-      setTitle(ToolInfo.title);
-      setUrlImg(ToolInfo.urlImg);
-      setlink(ToolInfo.link);
-      setDetail(ToolInfo.detail);
+      form.setFieldsValue({
+        tools: {
+          title: ToolInfo.title,
+          urlImg: ToolInfo.urlImg,
+          link: ToolInfo.link,
+          detail: ToolInfo.detail,
+        },
+      });
       console.log(ToolInfo, "+++++++ToolInfo++++");
     });
   };
@@ -79,8 +81,7 @@ function AddTools(props) {
     }
   };
   return (
-    <Form {...layout} name="tool" onFinish={onFinish}>
-      {console.log('XXXXXXXXXXXXXX',title)}
+    <Form {...layout} name="tool" onFinish={onFinish} form={form}>
       <Form.Item
         name={["tools", "title"]}
         label="工具名称"
@@ -90,9 +91,9 @@ function AddTools(props) {
           },
         ]}
       >
-        <Input defaultValue={title} />
+        <Input />
       </Form.Item>
-      
+
       <Form.Item
         name={["tools", "urlImg"]}
         label="封面图片地址"
@@ -102,7 +103,7 @@ function AddTools(props) {
           },
         ]}
       >
-        <Input defaultValue={urlImg} />
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -114,7 +115,7 @@ function AddTools(props) {
           },
         ]}
       >
-        <Input defaultValue={link} />
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -126,7 +127,7 @@ function AddTools(props) {
           },
         ]}
       >
-        <Input.TextArea defaultValue={detail} />
+        <Input.TextArea />
       </Form.Item>
 
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
