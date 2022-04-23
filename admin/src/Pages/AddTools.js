@@ -19,7 +19,7 @@ function AddTools(props) {
       setToolsId(tmpId);
       getToolById(tmpId); //获得相应id的工具的信息
     }
-  }, []);
+  },[]);
 
   const getToolById = (tmpId) => {
     axios(servicePath.getToolById + tmpId, {
@@ -31,7 +31,7 @@ function AddTools(props) {
       setUrlImg(ToolInfo.urlImg);
       setlink(ToolInfo.link);
       setDetail(ToolInfo.detail);
-      console.log(ToolInfo,'+++++++ToolInfo++++');
+      console.log(ToolInfo, "+++++++ToolInfo++++");
     });
   };
 
@@ -80,6 +80,7 @@ function AddTools(props) {
   };
   return (
     <Form {...layout} name="tool" onFinish={onFinish}>
+      {console.log('XXXXXXXXXXXXXX',title)}
       <Form.Item
         name={["tools", "title"]}
         label="工具名称"
@@ -91,6 +92,7 @@ function AddTools(props) {
       >
         <Input defaultValue={title} />
       </Form.Item>
+      
       <Form.Item
         name={["tools", "urlImg"]}
         label="封面图片地址"
@@ -102,6 +104,7 @@ function AddTools(props) {
       >
         <Input defaultValue={urlImg} />
       </Form.Item>
+
       <Form.Item
         name={["tools", "link"]}
         label="工具网址"
@@ -113,6 +116,7 @@ function AddTools(props) {
       >
         <Input defaultValue={link} />
       </Form.Item>
+
       <Form.Item
         name={["tools", "detail"]}
         label="工具介绍"
@@ -124,9 +128,10 @@ function AddTools(props) {
       >
         <Input.TextArea defaultValue={detail} />
       </Form.Item>
+
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          提交
+          发布工具
         </Button>
       </Form.Item>
     </Form>
