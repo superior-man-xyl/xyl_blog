@@ -115,6 +115,7 @@ function AddArticle(props) {
         if (res.data.isSuccess) {
           //中台返回的isSuccesss是个boolean值
           message.success("文章发布成功");
+          props.history.push("/index/list/");
         } else {
           message.error("文章发布失败");
         }
@@ -129,6 +130,7 @@ function AddArticle(props) {
       }).then((res) => {
         if (res.data.isSuccess) {
           message.success("文章修改成功");
+          props.history.push("/index/list/");
         } else {
           message.error("文章修改失败");
         }

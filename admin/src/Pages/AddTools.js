@@ -60,6 +60,7 @@ function AddTools(props) {
         if (res.data.isSuccess) {
           //中台返回的isSuccesss是个boolean值
           message.success("工具发布成功");
+          props.history.push("/index/ToolsList/");
         } else {
           message.error("工具发布失败");
         }
@@ -74,6 +75,7 @@ function AddTools(props) {
       }).then((res) => {
         if (res.data.isSuccess) {
           message.success("工具修改成功");
+          props.history.push("/index/ToolsList/");
         } else {
           message.error("工具修改失败");
         }
